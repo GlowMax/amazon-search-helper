@@ -1,75 +1,66 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>検索リンク生成ツール</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>検索ヘルパー</title>
   <style>
     body {
       font-family: sans-serif;
-      margin: 20px;
-      padding: 0;
-      background: #f2f2f2;
+      margin: 2em;
+      background-color: #f8f8f8;
     }
-    .container {
-      max-width: 700px;
-      margin: auto;
+    h1 {
+      color: #333;
+    }
+    .box {
       background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-    h1, h2 {
-      text-align: center;
-    }
-    p {
-      line-height: 1.6;
+      border: 1px solid #ccc;
+      padding: 1em;
+      border-radius: 8px;
+      margin-bottom: 2em;
     }
     ul {
-      list-style: none;
-      padding-left: 0;
+      padding-left: 1.5em;
     }
-    li {
-      margin: 10px 0;
-    }
-    a {
+    a.button {
       display: inline-block;
-      padding: 10px 15px;
-      background: #4CAF50;
+      padding: 0.5em 1em;
+      background: #007acc;
       color: white;
       text-decoration: none;
       border-radius: 5px;
+      margin-right: 1em;
     }
-    a:hover {
-      background: #45a049;
+    a.button:hover {
+      background: #005f99;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🔍 検索リンク生成ツール</h1>
 
-    <h2>このページについて</h2>
+  <h1>検索ヘルパー ツール集</h1>
+
+  <div class="box">
+    <h2>＜このページについて＞</h2>
     <p>
       AmazonやGoogle/Safariで必須や除外などの条件を含めた検索が<br>
       簡単に行いたいと思い作りました。
     </p>
-
-    <h2>使い方</h2>
-    <p>
-      各ページに飛んでいただき、必須項目や除外項目を入力後に<br>
-      変換ボタンを押してください。<br><br>
-      その後、リンクボタンを押して頂ければ検索出来ます。<br><br>
-      リンクを押すことに不安を感じる方は下にある検索文字列をコピーし、<br>
-      貼って頂いても同じ動作が出来ます。<br><br>
-      お好みでお使いください。
-    </p>
-
-    <h2>検索ツールを選ぶ</h2>
+    <h2>＜使い方＞</h2>
     <ul>
-      <li><a href="amazon-search.html">🛒 Amazon検索ツール</a></li>
-      <li><a href="google-search.html">🔍 Google検索ツール</a></li>
+      <li>各ページに飛んでいただき、必須項目や除外項目を入力後に変換ボタンを押してください。</li>
+      <li>その後、リンクボタンを押して頂ければ検索出来ます。</li>
+      <li>リンクを押すことに不安を感じる方は下にある検索文字列をコピーし、貼って頂いても同じ動作が出来ます。</li>
     </ul>
+    <p>お好みでお使いください。</p>
   </div>
+
+  <div class="box">
+    <h2>🔍 検索ツールリンク</h2>
+    <a class="button" href="amazon-search.html">Amazon検索ツール</a>
+    <a class="button" href="google_search_helper.html">Google検索ツール</a>
+  </div>
+
 </body>
 </html>
