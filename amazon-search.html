@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Amazon検索リンク変換ツール</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f9f9f9; }
+    input, button, textarea { font-size: 1rem; }
+    input { margin: 5px 0; width: 100%; max-width: 400px; }
+    textarea { width: 100%; height: 3em; margin-top: 5px; }
+    #output { margin-top: 20px; }
+    .btn-amazon {
+      margin-left: 10px;
+      background: #ff9900;
+      color: #000;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔍 Amazon検索リンク変換ツール</h1>
+
+  <p><strong>検索ワード（必須）:</strong></p>
+  <input id="main" placeholder="例：スマートウォッチ" required>
+
+  <p><strong>必須に追加したいワード（任意）：</strong></p>
+  <input id="must1" placeholder="ワード1（例：Bluetooth）">
+  <input id="must2" placeholder="ワード2（例：防水）">
+
+  <p><strong>除外ワード（任意）：</strong></p>
+  <input id="not1" placeholder="除外ワード1（例：子供）">
+  <input id="not2" placeholder="除外ワード2（例：中古）">
+
+  <br><br>
+  <button onclick="makeLink()">🔗 検索リンクを生成</button>
+
+  <div id="output"></div>
+
+  <script>
+    function makeLink() {
+      const main = document.getElementById("main").value.trim();
+      const must1 = document.getElementById("must1").value.trim();
+      const must2 = document.getElementById("must2").value.trim();
+      const not1 = document.getElementById("not1").value.trim();
+      const not2 = document.getElementById("not2").value.trim();
+
+      if (!main) {
+        alert("⚠️ 検索ワード（必須）を入力してください。");
+        return;
+      }
+
+      const words = [main];
+      if (must1) words.push(must1);
+      if (must2) words.push(must2);
+      if (not1) words.push("-" + not1);
+      if (not2) words.push("-" + not2);
+
+      const query = words.join(" ");
+      const encoded = encodeURIComponent(query);
+      const url = "https://www.amazon.co.jp/s?k=" + encoded;
+
+      const html = `
+        <p>🔗 <a href="${url}" target="_blank">Amazonで検索を開く</a>
+        <button class="btn-amazon" onclick="window.open('${url}')">Amazonを開く</button></p>
+        <p><strong>📝 手動コピー用 検索ワード</strong></p>
+        <textarea id="copyTarget">${query}</textarea>
+        <button onclick="copyToClipboard()">📋 コピー</button>
+      `;
+
+      document.getElementById("output").innerHTML = html;
+    }
+
+    function copyToClipboard() {
+      const t = document.getElementById("copyTarget");
+      t.select();
+      document.execCommand("copy");
+      alert("📋 コピーしました！");
+    }
+  </script>
+</body>
+</html>
+

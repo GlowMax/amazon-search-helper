@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google検索リンク生成</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+      padding: 0;
+      background: #f8f8f8;
+    }
+    h1 {
+      text-align: center;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .button-area {
+      margin-top: 15px;
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .output {
+      margin-top: 20px;
+    }
+    .output a {
+      display: block;
+      margin-bottom: 10px;
+    }
+    textarea {
+      width: 100%;
+      height: 60px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Google検索リンク生成</h1>
+    <label>検索キーワード（必須）</label>
+    <input type="text" id="mainWord" placeholder="例：スマートウォッチ">
+
+    <label>必須ワード1</label>
+    <input type="text" id="must1">
+
+    <label>必須ワード2</label>
+    <input type="text" id="must2">
+
+    <label>除外ワード1</label>
+    <input type="text" id="not1">
+
+    <label>除外ワード2</label>
+    <input type="text" id="not2">
+
+    <div class="button-area">
+      <button onclick="generateLink()">検索リンクを作成</button>
+    </div>
+
+    <div class="output">
+      <label>🔍 検索リンク</label>
+      <a id="googleLink" href="#" target="_blank">（ここにGoogle検索リンクが表示されます）</a>
+
+      <label>📋 手動コピー用 検索ワード</label>
+      <textarea id="queryText" readonly></textarea>
+      <button onclick="copyQuery()">コピー</button>
+    </div>
+  </div>
+
+  <script>
+    function generateLink() {
+      const main = document.getElementById("mainWord").value.trim();
+      const must1 = document.getElementById("must1").value.trim();
+      const must2 = document.getElementById("must2").value.trim();
+      const not1 = document.getElementById("not1").value.trim();
+      const not2 = document.getElementById("not2").value.trim();
+
+      if (!main) {
+        alert("検索キーワードは必須です。");
+        return;
+      }
+
+      let query = main;
+      if (must1) query += ` "${must1}"`;
+      if (must2) query += ` "${must2}"`;
+      if (not1) query += ` -${not1}`;
+      if (not2) query += ` -${not2}`;
+
+      const encoded = encodeURIComponent(query);
+      const url = `https://www.google.com/search?q=${encoded}`;
+
+      document.getElementById("googleLink").href = url;
+      document.getElementById("googleLink").textContent = url;
+      document.getElementById("queryText").value = query;
+    }
+
+    function copyQuery() {
+      const textarea = document.getElementById("queryText");
+      textarea.select();
+      document.execCommand("copy");
+      alert("検索語句をコピーしました。");
+    }
+  </script>
+</body>
+</html>
